@@ -27,9 +27,7 @@ module.exports = {
         return new HDWalletProvider(mnemonic, 'https://nile.dev-ocean.com', 0, 5);
       },
       from: '0xbf894BDF5CFfF5944547f19e21b8c75612990C2a',
-      network_id: '8995',
-      gas: 4465030,
-      gasPrice: 10000000000
+      network_id: '8995'
     },
     ropsten: {
       provider: () => {

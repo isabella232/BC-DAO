@@ -10,7 +10,9 @@
     "truffle-config.js"
   ],
   "scripts": {
+    "start": "./node_modules/.bin/ganache-cli",
     "push": "npx oz publish --network development && npx oz push --network development",
+    "deploy:nile": "npx oz publish --network nile && npx oz push --network nile",
     "test": "npx oz publish --network development && npx oz push --network development && truffle test",
     "compile": "truffle compile --all",
     "build": "rimraf build && npx oz compile",
@@ -53,6 +55,7 @@
     "eslint-plugin-prettier": "3.1.0",
     "eth-gas-reporter": "^0.2.12",
     "ethlint": "1.2.4",
+    "ganache-cli": "^6.7.0",
     "husky": "3.0.0",
     "prettier": "1.18.2",
     "prettier-plugin-solidity": "1.0.0-alpha.27",

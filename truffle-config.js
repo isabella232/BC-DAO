@@ -3,7 +3,7 @@ require('dotenv').config();
 require('@babel/register');
 require('@babel/polyfill');
 
-const mnemonic = process.env.MNENOMIC;
+const mnemonic = process.env.METAMASK_MNEMONIC;
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 module.exports = {
@@ -21,6 +21,15 @@ module.exports = {
       port: 8555, // <-- If you change this, also set the port option in .solcover.js.
       gas: 0xfffffffffff, // <-- Use this high gas value
       gasPrice: 0x01 // <-- Use this low gas price
+    },
+    nile: {
+      provider: () => {
+        return new HDWalletProvider(mnemonic, 'https://nile.dev-ocean.com', 0, 5);
+      },
+      from: '0xbf894BDF5CFfF5944547f19e21b8c75612990C2a',
+      network_id: '8995',
+      gas: 4465030,
+      gasPrice: 10000000000
     },
     ropsten: {
       provider: () => {

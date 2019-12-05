@@ -20,7 +20,6 @@ contract BondingCurve is Initializable, Ownable, Pausable {
     ICurveLogic internal _buyCurve;
     address internal _beneficiary;
 
-    uint256 internal _reserveBalance;
     uint256 internal _reservePercentage;
     uint256 internal _dividendPercentage;
 
@@ -114,7 +113,7 @@ contract BondingCurve is Initializable, Ownable, Pausable {
     /// @notice             Get the price in ether to mint tokens
     /// @param numTokens    The number of tokens to calculate price for
     function priceToBuy(uint256 numTokens) public view returns (uint256) {
-        return _buyCurve.calcMintPrice(_bondedToken.totalSupply(), _reserveBalance, numTokens);
+        return _buyCurve.calcMintPrice(_bondedToken.totalSupply(), reserveBalance(), numTokens);
     }
 
     /// @notice             Get the reward in ether to burn tokens
@@ -140,7 +139,6 @@ contract BondingCurve is Initializable, Ownable, Pausable {
         uint256 tokensToReserve = rewardForSell(numTokens);
         uint256 tokensToBeneficiary = buyPrice.sub(tokensToReserve);
 
-        _reserveBalance = _reserveBalance.add(tokensToReserve);
         _bondedToken.mint(recipient, numTokens);
 
         require(
@@ -162,8 +160,6 @@ contract BondingCurve is Initializable, Ownable, Pausable {
 
         uint256 burnReward = rewardForSell(numTokens);
         require(burnReward >= minPrice, PRICE_BELOW_MIN);
-
-        _reserveBalance = _reserveBalance.sub(burnReward);
 
         _bondedToken.burn(msg.sender, numTokens);
         _collateralToken.transfer(recipient, burnReward);
@@ -265,7 +261,7 @@ contract BondingCurve is Initializable, Ownable, Pausable {
 
     /// @notice Get reserve balance
     function reserveBalance() public view returns (uint256) {
-        return _reserveBalance;
+        return _collateralToken.balanceOf(address(this));
     }
 
     /// @notice Get split on buy parameter

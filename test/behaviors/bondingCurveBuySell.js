@@ -42,6 +42,9 @@ const bondingCurveBuySellTests = async (suiteName, config) => {
             .div(bn(100));
         const maxBuyPrice = bn(0); //We don't want a max price unless we're specifically testing that
         const minSellPrice = bn(0); //We don't want a min price unless we're specifically testing that
+
+        let tx;
+
         describe('Helper', async () => {
             console.log(2)
             it('should show buy price correctly', async function () {
@@ -245,9 +248,8 @@ const bondingCurveBuySellTests = async (suiteName, config) => {
                 await eco.bulkMint(paymentToken, tokenMinter, [curveOwner, buyer], userBalances);
                 await eco.bulkApprove(paymentToken, bondingCurve.address, [curveOwner, buyer], approvalAmount);
 
-                const beforeBalance = new BN(
-                    await paymentToken.balanceOf(deployParams.beneficiary, {from: buyer})
-                );
+                const beneficiary = curveOwner;
+                const beforeBalance = new BN(await paymentToken.balanceOf(beneficiary, {from: buyer}));
 
                 tx = await bondingCurve
                     .buy(numTokens, maxBuyPrice, buyer, {
@@ -256,9 +258,7 @@ const bondingCurveBuySellTests = async (suiteName, config) => {
 
                 const event = expectEvent.inLogs(tx.events, 'Buy');
 
-                const afterBalance = new BN(
-                    await paymentToken.balanceOf(deployParams.beneficiary, {from: buyer})
-                );
+                const afterBalance = new BN(await paymentToken.balanceOf(beneficiary, {from: buyer}));
 
                 const beneficiaryAmount = new BN(expectEvent.getParameter(event, 'beneficiaryAmount'));
 

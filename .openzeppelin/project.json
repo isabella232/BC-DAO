@@ -1,24 +1,28 @@
 {
   "manifestVersion": "2.2",
   "contracts": {
-    "StaticCurveLogic": "StaticCurveLogic",
     "BancorCurveLogic": "BancorCurveLogic",
+    "BancorCurveService": "BancorCurveService",
+    "BancorFormula": "BancorFormula",
     "BondedToken": "BondedToken",
-    "RewardsDistributor": "RewardsDistributor",
     "BondingCurve": "BondingCurve",
     "BondingCurveFactory": "BondingCurveFactory",
-    "BancorCurveService": "BancorCurveService"
+    "PaymentPool": "PaymentPool",
+    "Power": "Power",
+    "RewardsDistributor": "RewardsDistributor",
+    "StaticCurveLogic": "StaticCurveLogic"
   },
-  "dependencies": {
-    "@openzeppelin/contracts-ethereum-package": "^2.2.3"
-  },
+  "dependencies": {},
   "name": "@dorg/bc-dao",
   "version": "0.0.1-alpha",
   "compiler": {
-    "manager": "openzeppelin",
-    "solcVersion": "0.5.10",
+    "manager": "truffle",
     "compilerSettings": {
-      "optimizer": {}
+      "optimizer": {
+        "enabled": false,
+        "runs": "200"
+      }
     }
-  }
+  },
+  "telemetryOptIn": false
 }

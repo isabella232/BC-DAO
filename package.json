@@ -14,7 +14,6 @@
     "push": "npx oz publish --network development && npx oz push --network development",
     "deploy:nile": "npx oz publish --network nile && npx oz push --network nile",
     "test": "npx oz publish --network development && npx oz push --network development --force && truffle test",
-    "test:spree": "npx oz publish --network spree && npx oz push --network spree --force && truffle test",
     "compile": "truffle compile --all",
     "build": "rimraf build && npx oz compile",
     "deploy": "sh ecosystem.deploy.sh",
@@ -41,7 +40,8 @@
     "@openzeppelin/upgrades": "2.5.2",
     "dotenv": "6.2.0",
     "openzeppelin-test-helpers": "0.4.2",
-    "truffle-hdwallet-provider": "1.0.3"
+    "truffle-hdwallet-provider": "1.0.3",
+    "web3-provider-engine": "^15.0.4"
   },
   "devDependencies": {
     "@babel/core": "7.5.5",

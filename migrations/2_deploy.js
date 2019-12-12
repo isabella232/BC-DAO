@@ -5,7 +5,7 @@ const { add, push, create } = scripts;
 global.web3 = web3;
 const defaultConfig = require('./config.js').defaultConfig;
 const {curveParams, curveLogicType, collateralType, bondedTokenParams, collateralTokenParams, curveLogicParams} = defaultConfig.deployParams;
-const {accounts} = defaultConfig;
+const {accounts, addresses} = defaultConfig;
 
 const RewardsDistributor = artifacts.require('RewardsDistributor.sol');
 const BondedToken = artifacts.require('BondedToken.sol');
@@ -41,9 +41,9 @@ async function deploy(options) {
       bondedTokenParams.name,
       bondedTokenParams.symbol,
       bondedTokenParams.decimals,
-      accounts.curveOwner,
+      accounts.minter,
       rewardsDistributor.address,
-      ''); //paymentToken.address
+      addresses.collateralToken);
   
   await create(
     Object.assign({
@@ -52,12 +52,15 @@ async function deploy(options) {
       methodArgs: [
         accounts.curveOwner,
         accounts.curveOwner,
-        // paymentToken.address,
-        // bondedToken.address,
+        addresses.collateralToken,
+        bondedToken.address,
         bancorCurveLogic.address,
         curveParams.reservePercentage,
         curveParams.dividendPercentage
       ] }, options));
+
+  await bondedToken.contract.methods.addMinter(bondingCurve.address).send({from: accounts.minter});
+  // await bondedToken.contract.methods.renounceMinter().send({from: accounts.minter});
 }
 
 module.exports = function(deployer, networkName, accounts) {

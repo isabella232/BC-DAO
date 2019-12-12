@@ -4,6 +4,10 @@ const {bn} = require("./utils");
 const defaultConfig = {
     accounts: {
         curveOwner: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
+        minter: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE'
+    },
+    addresses: {
+        collateralToken: ''
     },
     deployParams: {
         // collateralType: TokenType.ERC20,
@@ -18,8 +22,8 @@ const defaultConfig = {
             decimals: bn(18)
         },
         collateralTokenParams: {
-            name: "PaymentToken",
-            symbol: "Pay",
+            name: 'PaymentToken',
+            symbol: 'Pay',
             decimals: 18,
             initialSupply: bn(1000000000)
         },

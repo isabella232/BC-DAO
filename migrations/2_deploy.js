@@ -51,7 +51,7 @@ async function deploy(options) {
       methodName: 'initialize',
       methodArgs: [
         accounts.curveOwner,
-        accounts.curveOwner,
+        accounts.beneficiary,
         addresses.collateralToken,
         bondedToken.address,
         bancorCurveLogic.address,

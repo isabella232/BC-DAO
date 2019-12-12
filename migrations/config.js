@@ -4,6 +4,7 @@ const {bn} = require("./utils");
 const defaultConfig = {
     accounts: {
         curveOwner: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
+        beneficiary: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
         minter: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
         signer: '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260'
     },
@@ -14,19 +15,13 @@ const defaultConfig = {
         // collateralType: TokenType.ERC20,
         // curveLogicType: CurveLogicType.STATIC,
         curveParams: {
-            reservePercentage: bn(10),
-            dividendPercentage: bn(50),
+            reservePercentage: bn(50), // sent to reserve, rest to beneficiary
+            dividendPercentage: bn(50), // sent to holders, rest to beneficiary
         },
         bondedTokenParams: {
             name: 'BondedToken',
             symbol: 'BND',
             decimals: bn(18)
-        },
-        collateralTokenParams: {
-            name: 'PaymentToken',
-            symbol: 'Pay',
-            decimals: 18,
-            initialSupply: bn(1000000000)
         },
         curveLogicParams: {
             tokenRatio: bn(100000000),

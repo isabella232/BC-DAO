@@ -41,11 +41,11 @@ async function deploy(options) {
       bondedTokenParams.name,
       bondedTokenParams.symbol,
       bondedTokenParams.decimals,
-      accounts.minter,
+      accounts.signer,
       rewardsDistributor.address,
       addresses.collateralToken);
   
-  await create(
+  const bondingCurve = await create(
     Object.assign({
       contractAlias: 'BondingCurve',
       methodName: 'initialize',
@@ -59,8 +59,18 @@ async function deploy(options) {
         curveParams.dividendPercentage.toString()
       ] }, options));
 
-  await bondedToken.contract.methods.addMinter(bondingCurve.address).send({from: accounts.minter});
+  await bondedToken.contract.methods.addMinter(bondingCurve.address).send({from: accounts.signer});
   // await bondedToken.contract.methods.renounceMinter().send({from: accounts.minter});
+
+  const result = {
+    'bancorCurveService': bancorCurveService.address,
+    'bancorCurveLogic': bancorCurveLogic.address,
+    'rewardsDistributor': rewardsDistributor.address,
+    'bondedToken': bondedToken.address,
+    'bondingCurve': bondingCurve.address,
+  }
+
+  console.log(JSON.stringify(result));
 }
 
 module.exports = function(deployer, networkName, accounts) {

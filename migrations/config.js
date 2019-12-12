@@ -7,7 +7,7 @@ const defaultConfig = {
         minter: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE'
     },
     addresses: {
-        collateralToken: ''
+        collateralToken: '0x86395571b801266bd23588A1A0799EcFeF603b71'
     },
     deployParams: {
         // collateralType: TokenType.ERC20,

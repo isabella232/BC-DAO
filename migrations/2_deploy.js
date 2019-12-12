@@ -55,8 +55,8 @@ async function deploy(options) {
         addresses.collateralToken,
         bondedToken.address,
         bancorCurveLogic.address,
-        curveParams.reservePercentage,
-        curveParams.dividendPercentage
+        curveParams.reservePercentage.toString(),
+        curveParams.dividendPercentage.toString()
       ] }, options));
 
   await bondedToken.contract.methods.addMinter(bondingCurve.address).send({from: accounts.minter});

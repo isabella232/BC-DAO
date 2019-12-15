@@ -9,19 +9,20 @@ const defaultConfig = {
         signer: '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260'
     },
     addresses: {
-        collateralToken: '0x86395571b801266bd23588A1A0799EcFeF603b71'
+        collateralToken: '0x975aF01e87118858D88A03e0f1d3475A5781e5b5'
     },
     deployParams: {
         // collateralType: TokenType.ERC20,
         // curveLogicType: CurveLogicType.STATIC,
         curveParams: {
-            reservePercentage: bn(50), // sent to reserve, rest to beneficiary
-            dividendPercentage: bn(50), // sent to holders, rest to beneficiary
+            reservePercentage: bn(100), // sent to reserve, rest to beneficiary
+            dividendPercentage: bn(100), // sent to holders, rest to beneficiary
         },
         bondedTokenParams: {
             name: 'BondedToken',
             symbol: 'BND',
-            decimals: bn(18)
+            decimals: bn(18),
+            initialSupply: bn(web3.utils.toWei('1000', 'ether'))
         },
         curveLogicParams: {
             tokenRatio: bn(100000000),

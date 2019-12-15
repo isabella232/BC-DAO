@@ -12,8 +12,8 @@
   "scripts": {
     "start": "./node_modules/.bin/ganache-cli",
     "push": "npx oz publish --network development && npx oz push --network development",
-    "deploy:nile": "npx oz publish --network nile && npx oz push --network nile",
-    "test": "npx oz publish --network development && npx oz push --network development --force && truffle test",
+    "push:nile": "npx oz publish --network nile && npx oz push --network nile",
+    "test": "npx oz publish --network development && npx oz push --network development --force && truffle test --network development",
     "migrate": "npx truffle migrate --network development",
     "migrate:reset": "npx truffle migrate --network development --reset",
     "compile": "truffle compile --all",

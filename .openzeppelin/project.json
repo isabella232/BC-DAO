@@ -1,25 +1,14 @@
 {
   "manifestVersion": "2.2",
   "contracts": {
-    "BancorCurveLogic": "BancorCurveLogic",
     "BancorCurveService": "BancorCurveService",
-    "BancorFormula": "BancorFormula",
+    "BancorCurveLogic": "BancorCurveLogic",
     "BondedToken": "BondedToken",
     "BondingCurve": "BondingCurve",
-    "BondingCurveFactory": "BondingCurveFactory",
-    "PaymentPool": "PaymentPool",
-    "Power": "Power",
-    "RewardsDistributor": "RewardsDistributor",
-    "StaticCurveLogic": "StaticCurveLogic"
+    "RewardsDistributor": "RewardsDistributor"
   },
   "dependencies": {},
   "name": "@dorg/bc-dao",
   "version": "0.0.1-alpha",
-  "compiler": {
-    "manager": "truffle",
-    "compilerSettings": {
-      "optimizer": {}
-    }
-  },
   "telemetryOptIn": true
 }

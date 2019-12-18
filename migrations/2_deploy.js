@@ -7,9 +7,6 @@ const defaultConfig = require('./config.js').defaultConfig;
 const {curveParams, curveLogicType, collateralType, bondedTokenParams, collateralTokenParams, curveLogicParams} = defaultConfig.deployParams;
 const {accounts, addresses} = defaultConfig;
 
-const RewardsDistributor = artifacts.require('RewardsDistributor.sol');
-const BondedToken = artifacts.require('BondedToken.sol');
-
 async function deploy(options) {
   // console.log(JSON.stringify(options));
   // if (options.network === 'dev-8996') {
@@ -40,9 +37,6 @@ async function deploy(options) {
       ]
     }, options));
 
-  // const rewardsDistributor = await RewardsDistributor.new();
-  // await rewardsDistributor.initialize(accounts.curveOwner);
-
   const rewardsDistributor = await create(
     Object.assign({
       contractAlias: 'RewardsDistributor', 
@@ -51,15 +45,6 @@ async function deploy(options) {
         accounts.curveOwner
       ]
     }, options));
-
-  // const bondedToken = await BondedToken.new();
-  // await bondedToken.initialize(
-  //     bondedTokenParams.name,
-  //     bondedTokenParams.symbol,
-  //     bondedTokenParams.decimals,
-  //     accounts.signer,
-  //     rewardsDistributor.address,
-  //     addresses.collateralToken);
   
   const bondedToken = await create(
     Object.assign({
@@ -74,6 +59,10 @@ async function deploy(options) {
         addresses.collateralToken
       ]
     }, options));
+
+  // await bondedToken.methods.addMinter(accounts.signer).send({from: options.from});
+  console.log('Minting initial supply:', bondedTokenParams.initialSupply.toString());
+  await bondedToken.methods.mint(accounts.signer, bondedTokenParams.initialSupply.toString()).send(options); //.send({from: accounts.signer});
 
   const bondingCurve = await create(
     Object.assign({
@@ -90,8 +79,6 @@ async function deploy(options) {
       ] 
     }, options));
 
-  console.log('Minting initial supply:', bondedTokenParams.initialSupply.toString());
-  await bondedToken.methods.mint(accounts.signer, bondedTokenParams.initialSupply.toString());
   console.log('Adding minter');
   await bondedToken.methods.addMinter(bondingCurve.address).send({from: accounts.signer});
   console.log('Renouncing minter');

@@ -9,7 +9,7 @@ const defaultConfig = {
         signer: '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260'
     },
     addresses: {
-        collateralToken: '0x975aF01e87118858D88A03e0f1d3475A5781e5b5'
+        collateralToken: '0xC9ad663CBa331715ba175E11BfC99b9AF524DA1E'
     },
     deployParams: {
         // collateralType: TokenType.ERC20,

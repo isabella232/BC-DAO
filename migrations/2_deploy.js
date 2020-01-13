@@ -37,12 +37,32 @@ async function deploy(options) {
       ]
     }, options));
 
+  // const paymentToken = await create(
+  //   Object.assign({
+  //     contractAlias: 'BondedToken',
+  //     methodName: 'initialize',
+  //     methodArgs: [
+  //       collateralTokenParams.name,
+  //       collateralTokenParams.symbol,
+  //       collateralTokenParams.decimals,
+  //       accounts.minter,
+  //       ZERO_ADDRESS,
+  //       ZERO_ADDRESS
+  //     ]
+  //   }, options));
+
+  // const paymentTokenInitialBalance = bn(web3.utils.toWei('60000', 'ether'));
+
+  // await paymentToken.methods
+  //     .mint(accounts.minter, paymentTokenInitialBalance.toString())
+  //     .send({from: accounts.minter});
+
   const rewardsDistributor = await create(
     Object.assign({
       contractAlias: 'RewardsDistributor', 
       methodName: 'initialize',
       methodArgs: [
-        accounts.curveOwner
+        accounts.signer
       ]
     }, options));
   
@@ -60,6 +80,10 @@ async function deploy(options) {
       ]
     }, options));
 
+  await rewardsDistributor.methods
+    .transferOwnership(bondedToken.address)
+    .send({from: accounts.signer});
+
   // await bondedToken.methods.addMinter(accounts.signer).send({from: options.from});
   console.log('Minting initial supply:', bondedTokenParams.initialSupply.toString());
   await bondedToken.methods.mint(accounts.signer, bondedTokenParams.initialSupply.toString()).send(options); //.send({from: accounts.signer});
@@ -69,7 +93,7 @@ async function deploy(options) {
       contractAlias: 'BondingCurve',
       methodName: 'initialize',
       methodArgs: [
-        accounts.curveOwner,
+        accounts.signer,
         accounts.beneficiary,
         addresses.collateralToken,
         bondedToken.address,

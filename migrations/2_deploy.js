@@ -86,7 +86,7 @@ async function deploy(options) {
 
   // await bondedToken.methods.addMinter(accounts.signer).send({from: options.from});
   console.log('Minting initial supply:', bondedTokenParams.initialSupply.toString());
-  await bondedToken.methods.mint(accounts.signer, bondedTokenParams.initialSupply.toString()).send(options); //.send({from: accounts.signer});
+  // await bondedToken.methods.mint(accounts.signer, bondedTokenParams.initialSupply.toString()).send(options); //.send({from: accounts.signer});
 
   const bondingCurve = await create(
     Object.assign({

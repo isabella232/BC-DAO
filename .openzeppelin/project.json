@@ -3,12 +3,11 @@
   "contracts": {
     "BancorCurveService": "BancorCurveService",
     "BancorCurveLogic": "BancorCurveLogic",
+    "RewardsDistributor": "RewardsDistributor",
     "BondedToken": "BondedToken",
-    "BondingCurve": "BondingCurve",
-    "RewardsDistributor": "RewardsDistributor"
+    "BondingCurve": "BondingCurve"
   },
   "dependencies": {},
   "name": "@dorg/bc-dao",
-  "version": "0.0.1-alpha",
-  "telemetryOptIn": true
+  "version": "0.0.1-alpha"
 }

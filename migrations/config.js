@@ -6,10 +6,10 @@ const defaultConfig = {
         curveOwner: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
         beneficiary: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
         minter: '0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE',
-        signer: '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260'
+        signer: '0xbf894BDF5CFfF5944547f19e21b8c75612990C2a'
     },
     addresses: {
-        collateralToken: '0xC9ad663CBa331715ba175E11BfC99b9AF524DA1E'
+        collateralToken: '0x9861Da395d7da984D5E8C712c2EDE44b41F777Ad'
     },
     deployParams: {
         // collateralType: TokenType.ERC20,

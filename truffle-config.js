@@ -3,7 +3,7 @@ require('dotenv').config();
 require('@babel/register');
 require('@babel/polyfill');
 
-const mnemonic = process.env.ADMIN_MNEMONIC;
+const mnemonic = process.env.MNEMONIC;
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const NonceTrackerSubprovider = require('web3-provider-engine/subproviders/nonce-tracker');
 
@@ -43,14 +43,12 @@ module.exports = {
     },
     development: {
       provider: () => setupWallet(
-            'https://nile.dev-ocean.com'
+            'http://localhost:8545'
         ),
-      network_id: '8995', // 8996
-      // 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260
-      // 0x00bd138abd70e2f00903268f3db08f2d25677c9e
-      // 0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0
-      // 0xA99D43d86A0758d5632313b8fA3972B6088A21BB
-      from: '0xbf894BDF5CFfF5944547f19e21b8c75612990C2a' // 0x0e190Baf2eBaA5322a93A205eD8450D6E893BbbE
+      network_id: '8996', //0x2324
+      gas: 8000000,
+      gasPrice: 10000,
+      from: '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260'
     },
     nile: {
       provider: () => {
@@ -58,7 +56,7 @@ module.exports = {
       },
       from: '0xbf894BDF5CFfF5944547f19e21b8c75612990C2a',
       network_id: '8995',
-      gas: 6666666,
+      gas: 8000000,
       gasPrice: 100
     },
     ropsten: {

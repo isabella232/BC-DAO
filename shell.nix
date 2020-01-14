@@ -1,7 +1,7 @@
 with import <nixpkgs> {};
 
 stdenv.mkDerivation {
-  name = "build-env";
+  name = "dev";
   buildInputs = [
     docker
     docker_compose

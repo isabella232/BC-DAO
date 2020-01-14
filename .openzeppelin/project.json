@@ -9,5 +9,11 @@
   },
   "dependencies": {},
   "name": "@dorg/bc-dao",
-  "version": "0.0.1-alpha"
+  "version": "0.0.1-alpha",
+  "compiler": {
+    "manager": "truffle",
+    "compilerSettings": {
+      "optimizer": {}
+    }
+  }
 }
